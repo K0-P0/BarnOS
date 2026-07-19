@@ -210,6 +210,28 @@ body.notrans .hero-hint .dotp{animation:none;opacity:.7}
   .cell+.cell{border-left:none;border-top:1px solid var(--stone-200)}
 }
 
+/* ---------- product evidence: screenshot + terminal ---------- */
+.shot{margin-top:22px;border:1px solid var(--stone-300);border-radius:10px;overflow:hidden;background:var(--stone-900)}
+.shot img{width:100%;height:auto;display:block}
+.shot-cap{font-size:12px;color:var(--stone-500);padding:10px 14px;background:var(--stone-100);border-top:1px solid var(--stone-200)}
+.term{margin-top:22px;background:#0a0c0e;border:1px solid #252d36;border-radius:10px;overflow:hidden}
+.term-bar{display:flex;align-items:center;gap:7px;padding:9px 13px;border-bottom:1px solid #252d36;background:#111418}
+.term-bar i{width:9px;height:9px;border-radius:50%;background:#2e3844;display:block}
+.term-bar span{margin-left:6px;color:#5e7080;font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.term-body{padding:14px 16px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:12px;line-height:1.75;color:#c8d8e8}
+.term-body b{display:block;color:#e8f0f8;font-weight:400}
+.term-body b::before{content:"$ ";color:#a78bfa}
+.term-body u{display:block;text-decoration:none;color:#8a9aaa;margin:9px 0 3px}
+.term-body i{display:block;font-style:normal}
+.term-body s{display:block;text-decoration:none;color:#3d4d5c;padding-left:24px}
+.term-body em{font-style:normal;font-weight:600}
+.t-pass{color:#38c872}.t-fail{color:#e05252}.t-warn{color:#f0a000}.t-skip{color:#5e7080}
+.t-crit{color:#e05252}.t-high{color:#f97316}.t-med{color:#f0a000}.t-info{color:#5e7080}.t-low{color:#5e7080}
+.term-body .sum{display:block;color:#8a9aaa;margin-top:9px}
+.term-body .note{display:block;color:#f0a000;margin-top:9px;white-space:pre-line}
+.term-cap{font-size:12px;color:var(--stone-500);padding:10px 14px;background:var(--stone-100);border-top:1px solid #252d36}
+
 /* ---------- home: pillars ---------- */
 #pillars{background:#fff;border-top:1px solid var(--stone-200);border-bottom:1px solid var(--stone-200)}
 .pillars-in{max-width:var(--wrap);margin:0 auto;padding:64px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center}
@@ -658,6 +680,11 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
           <a class="text-link" href="https://k0-p0.github.io/Monolith/" target="_blank" rel="noopener noreferrer">Visit the Monolith site →</a>
         </div>
       </div>
+      <div class="shot">
+        <img src="img/monolith-dashboard.png" width="1440" height="950" loading="lazy"
+             alt="The Monolith dashboard: monthly take-home, fixed costs, expenses, net remaining, savings rate and total saved across the top; a financial health score; a disposable-income breakdown; upcoming bills; and a sidebar listing the installed plugins.">
+        <p class="shot-cap">The Monolith dashboard. Real interface, invented numbers — this is a throwaway demo vault, not anyone's finances.</p>
+      </div>
     </div>
 
     <div class="card bigcard reveal">
@@ -761,6 +788,32 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
           <a class="text-link" href="https://github.com/K0-P0/Sentry" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:8px">Source on GitHub (GPL-3.0) →</a>
           <a class="text-link" href="#/roadmap" style="display:block;margin-top:8px">See the Sentry roadmap →</a>
         </div>
+      </div>
+      <div class="term">
+        <div class="term-bar"><i></i><i></i><i></i><span>sentry watch</span></div>
+        <div class="term-body">
+          <b>sentry watch</b>
+          <u>== internal zone ==</u>
+          <i>[<em class="t-skip">SKIP</em>] [<em class="t-low">LOW</em>] sshd_config readable</i>
+          <s>skipped: /etc/ssh/sshd_config not found — no SSH server configured on this host</s>
+          <i>[<em class="t-skip">SKIP</em>] [<em class="t-crit">CRITICAL</em>] Firewall enabled with default-deny inbound</i>
+          <s>skipped: could not query ufw status (permissions?)</s>
+          <i>[<em class="t-pass">PASS</em>] [<em class="t-info">INFO</em>] Docker socket exists at default path (informational)</i>
+          <i>[<em class="t-pass">PASS</em>] [<em class="t-info">INFO</em>] Scanned running containers for exposure</i>
+          <s>no running containers</s>
+          <i>[<em class="t-warn">WARN</em>] [<em class="t-med">MEDIUM</em>] Root filesystem encrypted at rest (LUKS)</i>
+          <s>no LUKS/crypt layer under / — data at rest is unencrypted</s>
+          <i>[<em class="t-pass">PASS</em>] [<em class="t-med">MEDIUM</em>] Unattended security upgrades enabled</i>
+          <i>[<em class="t-pass">PASS</em>] [<em class="t-med">MEDIUM</em>] Pending security updates</i>
+          <u>== public zone ==</u>
+          <i>[<em class="t-skip">SKIP</em>] [<em class="t-info">INFO</em>] Game server checks</i>
+          <s>skipped: no config at /etc/sentry/gameserver.json — add rcon_port/plugin_dir to enable</s>
+          <span class="sum">Summary: 8 checks, 0 failed, 1 warned, 3 skipped</span>
+          <span class="note">NOTE: 1 high-severity check(s) could not run, so this result is incomplete:
+  - [CRITICAL] Firewall enabled with default-deny inbound
+  If these were skipped for permissions, re-run with sudo.</span>
+        </div>
+        <p class="term-cap">An actual unprivileged run. Note what Sentry does with the checks it <em>couldn't</em> perform — it names them rather than quietly passing, because a clean report that skipped your firewall is worse than no report.</p>
       </div>
     </div>
 
