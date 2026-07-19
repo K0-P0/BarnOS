@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="BarnOS — an open-source ecosystem of local-first tools. Finance, hardware security, and property telemetry on your own hardware. No cloud required.">
+<meta name="description" content="BarnOS — an open-source ecosystem of local-first tools. Finance, hardware security, homelab auditing, and property telemetry on your own hardware. No cloud required.">
 <meta name="theme-color" content="#991b1b">
 <title>BarnOS — Your Digital Homestead</title>
 <link rel="icon" type="image/png" href="favicon.png">
@@ -144,8 +144,7 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:700;letter-spacing:-.005em}
 #home-projects{padding:80px 16px}
 .home-proj-head{text-align:center;margin-bottom:48px}
 .home-proj-head p{color:var(--stone-500);max-width:512px;margin:12px auto 0}
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:var(--wrap);margin:0 auto}
-@media(max-width:960px) and (min-width:769px){.proj-grid{grid-template-columns:1fr 1fr}}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:var(--wrap);margin:0 auto}
 .proj-card .top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .ic-box{display:flex;align-items:center;justify-content:center;background:var(--red-50);border-radius:10px;padding:9px;color:var(--red)}
 .proj-card h3{font-size:18px;font-weight:700}
@@ -195,7 +194,7 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:700;letter-spacing:-.005em}
 .value-card .ic.orange{color:var(--orange)}
 .value-card h3{font-size:17px;font-weight:700;margin-bottom:10px}
 .value-card p{color:var(--stone-500);font-size:14px}
-.arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px}
 .arch-box{padding:16px;border-radius:10px;background:var(--stone-50);border:1px solid var(--stone-200)}
 .arch-box .head{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:600;font-size:14px}
 .arch-box .head .ic{color:var(--red)}
@@ -291,6 +290,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
   <symbol id="i-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
   <symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-usb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="1"/><circle cx="4" cy="20" r="1"/><path d="M4.7 19.3 19 5"/><path d="m21 3-3 1 2 2Z"/><path d="M9.26 7.68 5 12l2 5"/><path d="m10 14 5 2 3.5-3.5"/><path d="m18 12 1-1 1 1-1 1Z"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
@@ -389,6 +389,10 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
             <polygon points="398,280 530,280 544,295 530,310 398,310" fill="#7f1d1d"/>
             <text x="408" y="301" font-size="15" fill="#faf5ea">SKELETONKEY</text>
           </a>
+          <a class="sign" href="#/projects" aria-label="Sentry — see the project page">
+            <polygon points="398,320 530,320 544,335 530,350 398,350" fill="#44403c"/>
+            <text x="408" y="341" font-size="15" fill="#faf5ea">SENTRY</text>
+          </a>
         </svg>
       </div>
     </div>
@@ -453,6 +457,17 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
           </div>
         </div>
         <p>Hardware-based security and access control device. FIDO2, biometrics, encrypted vault — no cloud required.</p>
+        <a class="text-link" href="#/projects">Learn more <svg class="ic" width="14" height="14"><use href="#i-chevron-right"/></svg></a>
+      </div>
+      <div class="card hoverable proj-card reveal">
+        <div class="top">
+          <span class="ic-box"><svg class="ic" width="22" height="22"><use href="#i-shield-check"/></svg></span>
+          <div>
+            <h3>Sentry</h3>
+            <span class="badge green">Active Development</span>
+          </div>
+        </div>
+        <p>Dead-simple security auditing for homelabs and self-hosted game servers. Findings grouped by trust zone — no account, no telemetry.</p>
         <a class="text-link" href="#/projects">Learn more <svg class="ic" width="14" height="14"><use href="#i-chevron-right"/></svg></a>
       </div>
     </div>
@@ -578,6 +593,39 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
       </div>
     </div>
 
+    <div class="card bigcard reveal">
+      <div class="head">
+        <span class="ic-box"><svg class="ic" width="28" height="28"><use href="#i-shield-check"/></svg></span>
+        <div>
+          <h2>Sentry</h2>
+          <div class="badges">
+            <span class="badge green">V0.1 — Active Development</span>
+            <span class="badge gray">Rust · CLI</span>
+          </div>
+        </div>
+      </div>
+      <p>Sentry is BarnOS's security auditor — a dead-simple command-line tool for homelabs and self-hosted game servers, written in Rust. It checks your machines against baseline security practices and groups findings by trust zone, because a private NAS and a public game server want opposite things. No account, no telemetry, nothing phoning home.</p>
+      <hr class="rule">
+      <div class="two-col">
+        <div>
+          <h4>What it checks</h4>
+          <ul class="check-list">
+            <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>SSH hardening — root login, password auth, fail2ban</li>
+            <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Firewall default-deny inbound</li>
+            <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Docker exposure — open bindings, privileged containers</li>
+            <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Disk encryption at rest</li>
+            <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Automatic updates &amp; pending patches</li>
+            <li><svg class="ic" width="13" height="13"><use href="#i-check"/></svg>Game servers — RCON exposure &amp; plugin integrity</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Two halves, one picture</h4>
+          <p class="note"><span class="strong" style="color:var(--stone-700);font-weight:600">sentry watch</span> runs on the machine itself and reads ground-truth local state. <span class="strong" style="color:var(--stone-700);font-weight:600">sentry probe</span> (coming in v0.2) scans from outside and sees exactly what an attacker sees. Neither can be fooled the same way — a full picture needs both.</p>
+          <a class="text-link" href="#/roadmap">See the Sentry roadmap →</a>
+        </div>
+      </div>
+    </div>
+
     <div class="dashed-box reveal">
       More BarnOS modules are in planning. Check the <a href="#/roadmap">Roadmap</a> to see what's coming next.
     </div>
@@ -643,6 +691,10 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
             <div class="head"><svg class="ic" width="18" height="18"><use href="#i-key"/></svg>Security (SkeletonKey)</div>
             <p>Hardware authentication and access control. A physical device that holds the cryptographic keys to the ecosystem.</p>
           </div>
+          <div class="arch-box">
+            <div class="head"><svg class="ic" width="18" height="18"><use href="#i-shield-check"/></svg>Audit (Sentry)</div>
+            <p>Baseline security checks across every host, grouped by trust zone. Runs on your schedule, reports only to you.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -697,6 +749,22 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
         <div class="rm-row"><span>Black Box hardware (pre-built Pi 5 kits)</span><span class="badge amber"><svg class="ic" width="11" height="11"><use href="#i-circle"/></svg>Planned</span></div>
         <div class="rm-row"><span>Solar telemetry dashboard integration</span><span class="badge gray"><svg class="ic" width="11" height="11"><use href="#i-circle"/></svg>Future</span></div>
         <div class="rm-row"><span>SkeletonKey authentication integration</span><span class="badge gray"><svg class="ic" width="11" height="11"><use href="#i-circle"/></svg>Future</span></div>
+      </div>
+    </div>
+
+    <div class="rm-section reveal">
+      <div class="rm-title">
+        <span class="ic-box"><svg class="ic" width="20" height="20"><use href="#i-shield-check"/></svg></span>
+        <h2>Sentry</h2>
+      </div>
+      <div class="card rm-card">
+        <div class="rm-row"><span>sentry watch — local audit agent (v0.1)</span><span class="badge green"><svg class="ic" width="11" height="11"><use href="#i-check"/></svg>Done</span></div>
+        <div class="rm-row"><span>SSH / firewall / Docker / disk / update checks</span><span class="badge green"><svg class="ic" width="11" height="11"><use href="#i-check"/></svg>Done</span></div>
+        <div class="rm-row"><span>Game-server checks — RCON exposure, plugin integrity</span><span class="badge green"><svg class="ic" width="11" height="11"><use href="#i-check"/></svg>Done</span></div>
+        <div class="rm-row"><span>sentry probe — external scanner (v0.2)</span><span class="badge amber"><svg class="ic" width="11" height="11"><use href="#i-circle"/></svg>Planned</span></div>
+        <div class="rm-row"><span>nftables / iptables firewall support</span><span class="badge amber"><svg class="ic" width="11" height="11"><use href="#i-circle"/></svg>Planned</span></div>
+        <div class="rm-row"><span>SHA-256 plugin fingerprints</span><span class="badge amber"><svg class="ic" width="11" height="11"><use href="#i-circle"/></svg>Planned</span></div>
+        <div class="rm-row"><span>Cross-host zone-by-zone health dashboard</span><span class="badge gray"><svg class="ic" width="11" height="11"><use href="#i-circle"/></svg>Future</span></div>
       </div>
     </div>
 
@@ -779,6 +847,13 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
       </div>
       <div class="card hoverable doc-card reveal">
         <div class="top">
+          <span class="ic-box"><svg class="ic" width="20" height="20"><use href="#i-shield-check"/></svg></span>
+          <div><span class="badge gray">Sentry</span><h3>Sentry Audits</h3></div>
+        </div>
+        <p>Build the Rust binary, run sentry watch on each host, and schedule it with cron for ongoing visibility.</p>
+      </div>
+      <div class="card hoverable doc-card reveal">
+        <div class="top">
           <span class="ic-box"><svg class="ic" width="20" height="20"><use href="#i-wifi"/></svg></span>
           <div><span class="badge gray">Hardware</span><h3>Physical Integration</h3></div>
         </div>
@@ -826,7 +901,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
     <div id="faq-list">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is BarnOS?<svg class="ic" width="18" height="18"><use href="#i-chevron-down"/></svg></button>
-        <div class="faq-a"><p>BarnOS is an open-source ecosystem of modular tools designed to run on your own hardware, completely independent of corporate cloud services. It covers personal finance, hardware security, solar telemetry, and physical property integration — all self-hosted and locally controlled.</p></div>
+        <div class="faq-a"><p>BarnOS is an open-source ecosystem of modular tools designed to run on your own hardware, completely independent of corporate cloud services. It covers personal finance, hardware security, security auditing, solar telemetry, and physical property integration — all self-hosted and locally controlled.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is BarnOS free and open source?<svg class="ic" width="18" height="18"><use href="#i-chevron-down"/></svg></button>
@@ -863,6 +938,10 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is NoMad?<svg class="ic" width="18" height="18"><use href="#i-chevron-down"/></svg></button>
         <div class="faq-a"><p>NoMad is the portable version of Monolith — a USB stick you can plug into any Windows or Linux PC. It runs entirely on the host's localhost so it's never visible to the network, uses a single-use launch token with a fresh session key every boot, and shuts itself down about 25 seconds after you close the tab, telling the browser to clear site data on the way out. Pull the stick and your finances leave with you. A pre-built stick with a bundled runtime (no Python needed on the host) is in beta testing now.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is Sentry?<svg class="ic" width="18" height="18"><use href="#i-chevron-down"/></svg></button>
+        <div class="faq-a"><p>Sentry is a free, open-source security auditing tool for homelabs and self-hosted game servers, written in Rust. Run sentry watch on a machine and it checks SSH hardening, firewall policy, Docker exposure, disk encryption, and pending updates — plus game-server specifics like RCON exposure and plugin integrity. Findings are grouped by trust zone (internal vs public) so you can spot when a public server is bridged into your private network. No account, no telemetry, and nothing phones home.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Can I contribute to BarnOS?<svg class="ic" width="18" height="18"><use href="#i-chevron-down"/></svg></button>
