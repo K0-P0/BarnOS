@@ -7,8 +7,11 @@
 <meta name="theme-color" content="#991b1b">
 <title>BarnOS — Your Digital Homestead</title>
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="fonts/zilla-slab-700.woff2" crossorigin>
 <script>document.documentElement.className+=' js';if(/[?&]fast/.test(location.search))document.documentElement.className+=' fast'</script>
 <style>
+@font-face{font-family:'Zilla Slab';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/zilla-slab-500.woff2') format('woff2')}
+@font-face{font-family:'Zilla Slab';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/zilla-slab-700.woff2') format('woff2')}
 :root{
   --red:#991b1b;--red-dark:#7f1d1d;--red-50:#fef2f2;--red-100:#fee2e2;--red-200:#fecaca;--red-300:#fca5a5;
   --stone-50:#fafaf9;--stone-100:#f5f5f4;--stone-200:#e7e5e4;--stone-300:#d6d3d1;--stone-400:#a8a29e;
@@ -18,6 +21,7 @@
   --blue-50:#eff6ff;--blue-200:#bfdbfe;--blue-600:#2563eb;--blue-700:#1d4ed8;
   --amber-50:#fffbeb;--amber-200:#fde68a;--amber-500:#f59e0b;--amber-700:#b45309;
   --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --fd:'Zilla Slab',Georgia,'Times New Roman',serif;
   --wrap:1024px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -87,11 +91,14 @@ ul{list-style:none}
 @keyframes pageIn{from{transform:translateY(8px)}to{transform:none}}
 .inner{max-width:var(--wrap);margin:0 auto;padding:112px 16px 96px}
 .inner.narrow{max-width:768px}
-.page-head .badge{margin-bottom:16px}
-h1{font-size:clamp(34px,5vw,48px);font-weight:900;letter-spacing:-.025em;line-height:1.1;margin-bottom:16px}
+h1,h2,h3,.brand span,.foot-brand b{font-family:var(--fd)}
+h1{font-size:clamp(36px,5vw,52px);font-weight:700;letter-spacing:-.01em;line-height:1.08;margin-bottom:16px}
 .page-head .lead{color:var(--stone-500);font-size:18px;margin-bottom:48px;max-width:640px}
-h2{font-size:clamp(24px,3.5vw,32px);font-weight:700;letter-spacing:-.015em}
-.section-title{margin-bottom:24px;font-size:24px}
+h2{font-size:clamp(24px,3.5vw,32px);font-weight:700;letter-spacing:-.005em}
+.section-title{margin-bottom:24px;font-size:26px}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.eyebrow::before{content:'';width:26px;height:3px;background:var(--red);flex-shrink:0}
+.eyebrow.center{justify-content:center}
 
 /* ---------- reveal animation (only hides content when JS is running) ---------- */
 .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
@@ -99,20 +106,32 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:700;letter-spacing:-.015em}
 /* ?fast — skip all animation, for screenshot tests */
 .js.fast .reveal{opacity:1;transform:none;transition:none}
 .js.fast .page.active{animation:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .page.active{animation:none}
+  .faq-a{transition:none}
+}
 
-/* ---------- home: hero ---------- */
-#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:96px 16px 64px;position:relative;overflow:hidden}
-#hero::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.4;
-  background-image:radial-gradient(circle at 20% 50%,rgba(252,165,115,.13) 0%,transparent 50%),
-                   radial-gradient(circle at 80% 20%,rgba(153,27,27,.07) 0%,transparent 50%)}
-.hero-in{position:relative;z-index:1;max-width:768px}
-.hero-in img{height:130px;width:auto;margin:0 auto 24px;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.08))}
-.hero-in .badge{margin-bottom:24px}
-.hero-in h1{font-size:clamp(44px,8vw,72px);margin-bottom:24px}
-.hero-in h1 .red{color:var(--red)}
-.hero-in p{font-size:20px;color:var(--stone-600);max-width:576px;margin:0 auto 40px;line-height:1.6}
-.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+/* ---------- home: hero (homestead scene on the horizon line) ---------- */
+#hero{position:relative;padding:64px 16px 0;overflow:hidden}
+.hero-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;
+  align-items:end;min-height:calc(100vh - 68px)}
+.hero-copy{align-self:center;padding:72px 0 96px}
+.hero-copy h1{font-size:clamp(46px,6.5vw,78px);line-height:1.02;margin:18px 0 22px;letter-spacing:-.015em}
+.hero-copy h1 .red{color:var(--red)}
+.hero-copy p{font-size:19px;color:var(--stone-600);max-width:520px;margin-bottom:36px}
+.hero-art{align-self:end}
+.hero-art svg{width:100%;max-width:560px;height:auto;display:block;margin:0 auto}
+.sign{cursor:pointer}
+.sign:hover polygon,.sign:focus polygon{filter:brightness(1.18)}
+.sign text{font-family:var(--fd);font-weight:700;letter-spacing:1.5px}
+.horizon{height:4px;background:var(--red)}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;min-height:0;gap:8px}
+  .hero-copy{padding:48px 0 8px}
+}
 
 /* ---------- home: pillars ---------- */
 #pillars{background:#fff;border-top:1px solid var(--stone-200);border-bottom:1px solid var(--stone-200)}
@@ -135,8 +154,12 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:700;letter-spacing:-.015em}
 .text-link{display:inline-flex;align-items:center;gap:3px;color:var(--red);font-size:14px;font-weight:600}
 .text-link:hover{color:var(--red-dark);text-decoration:underline}
 
-/* ---------- red banner ---------- */
-.banner{background:var(--red);padding:80px 16px;text-align:center}
+/* ---------- red banner (barn-door cross-brace texture) ---------- */
+.banner{background:var(--red);padding:80px 16px;text-align:center;position:relative;overflow:hidden}
+.banner::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.045) 0 3px,transparent 3px 38px),
+             repeating-linear-gradient(-45deg,rgba(255,255,255,.045) 0 3px,transparent 3px 38px)}
+.banner>*{position:relative}
 .banner h2{color:#fff;margin-bottom:16px}
 .banner p{color:var(--red-200);font-size:18px;max-width:672px;margin:0 auto 32px}
 .quote{background:var(--red);border-radius:16px;padding:32px;text-align:center}
@@ -309,17 +332,68 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
 <!-- ═════════ HOME ═════════ -->
 <section class="page active" id="page-home">
   <div id="hero">
-    <div class="hero-in">
-      <img src="barnos-logo.png" alt="BarnOS logo">
-      <div><span class="badge">Open Source · Local-First · Self-Sovereign</span></div>
-      <h1>Your Digital<br><span class="red">Homestead.</span></h1>
-      <p>BarnOS is an open-source ecosystem of tools that strips away corporate cloud dependency and hands total control, privacy, and ownership back to you.</p>
-      <div class="hero-cta">
-        <a class="btn" href="#/projects">Explore Projects <svg class="ic" width="18" height="18"><use href="#i-chevron-right"/></svg></a>
-        <a class="btn-outline" href="#/about">Our Mission</a>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Open Source · Local-First · Self-Sovereign</div>
+        <h1>Your Digital<br><span class="red">Homestead.</span></h1>
+        <p>BarnOS is an open-source ecosystem of tools that strips away corporate cloud dependency and hands total control, privacy, and ownership back to you.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#/projects">Explore Projects <svg class="ic" width="18" height="18"><use href="#i-chevron-right"/></svg></a>
+          <a class="btn-outline" href="#/about">Our Mission</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 560 380" aria-label="The BarnOS homestead: a solar barn with a network antenna, and a trail signpost pointing to Monolith, NoMad, and SkeletonKey">
+          <!-- sun -->
+          <g stroke="#f97316" stroke-width="7" stroke-linecap="round">
+            <line x1="108" y1="74" x2="122" y2="74"/>
+            <line x1="96.9" y1="47.1" x2="106.8" y2="37.2"/>
+            <line x1="70" y1="36" x2="70" y2="22"/>
+            <line x1="43.1" y1="47.1" x2="33.2" y2="37.2"/>
+            <line x1="32" y1="74" x2="18" y2="74"/>
+          </g>
+          <circle cx="70" cy="74" r="30" fill="#f97316"/>
+          <!-- fence -->
+          <rect x="20" y="310" width="10" height="70" rx="2" fill="#78716c"/>
+          <rect x="75" y="310" width="10" height="70" rx="2" fill="#78716c"/>
+          <rect x="130" y="310" width="10" height="70" rx="2" fill="#78716c"/>
+          <rect x="8" y="328" width="152" height="8" rx="2" fill="#a8a29e"/>
+          <rect x="8" y="350" width="152" height="8" rx="2" fill="#a8a29e"/>
+          <!-- barn -->
+          <rect x="168" y="196" width="194" height="184" fill="#991b1b"/>
+          <polygon points="150,196 265,110 380,196" fill="#7f1d1d"/>
+          <rect x="251" y="156" width="28" height="28" rx="2" fill="#faf5ea"/>
+          <g transform="translate(172,187) rotate(-36.8)">
+            <rect x="8" y="-30" width="84" height="28" rx="2" fill="#44403c" stroke="#faf5ea" stroke-width="3"/>
+            <line x1="29" y1="-30" x2="29" y2="-2" stroke="#faf5ea" stroke-width="2.5"/>
+            <line x1="50" y1="-30" x2="50" y2="-2" stroke="#faf5ea" stroke-width="2.5"/>
+            <line x1="71" y1="-30" x2="71" y2="-2" stroke="#faf5ea" stroke-width="2.5"/>
+            <line x1="8" y1="-16" x2="92" y2="-16" stroke="#faf5ea" stroke-width="2.5"/>
+          </g>
+          <rect x="228" y="266" width="74" height="114" fill="#7f1d1d" stroke="#faf5ea" stroke-width="6"/>
+          <line x1="231" y1="272" x2="299" y2="374" stroke="#faf5ea" stroke-width="5"/>
+          <line x1="299" y1="272" x2="231" y2="374" stroke="#faf5ea" stroke-width="5"/>
+          <!-- network -->
+          <g transform="translate(302,34) scale(3.1)"><use href="#i-wifi" width="24" height="24" style="color:#991b1b"/></g>
+          <!-- signpost -->
+          <rect x="468" y="196" width="12" height="184" rx="2" fill="#57534e"/>
+          <a class="sign" href="https://k0-p0.github.io/Monolith/" target="_blank" rel="noopener noreferrer" aria-label="Monolith — visit the Monolith site">
+            <polygon points="398,200 530,200 544,215 530,230 398,230" fill="#991b1b"/>
+            <text x="408" y="221" font-size="15" fill="#faf5ea">MONOLITH</text>
+          </a>
+          <a class="sign" href="https://k0-p0.github.io/Monolith/#nomad" target="_blank" rel="noopener noreferrer" aria-label="NoMad — read about the NoMad USB stick">
+            <polygon points="398,240 530,240 544,255 530,270 398,270" fill="#b45309"/>
+            <text x="408" y="261" font-size="15" fill="#faf5ea">NOMAD</text>
+          </a>
+          <a class="sign" href="#/projects" aria-label="SkeletonKey — see the project page">
+            <polygon points="398,280 530,280 544,295 530,310 398,310" fill="#7f1d1d"/>
+            <text x="408" y="301" font-size="15" fill="#faf5ea">SKELETONKEY</text>
+          </a>
+        </svg>
       </div>
     </div>
   </div>
+  <div class="horizon"></div>
 
   <div id="pillars">
     <div class="pillars-in">
@@ -343,6 +417,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
 
   <div id="home-projects">
     <div class="home-proj-head reveal">
+      <div class="eyebrow center">The Ecosystem</div>
       <h2>Active Projects</h2>
       <p>Each module is independent, open-source, and built to run without any external dependency.</p>
     </div>
@@ -396,7 +471,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
 <section class="page" id="page-projects">
   <div class="inner">
     <div class="page-head">
-      <span class="badge">Ecosystem</span>
+      <div class="eyebrow">Ecosystem</div>
       <h1>Active Projects</h1>
       <p class="lead">BarnOS is built as distinct, independent modules — each one solves a specific problem without depending on a corporate cloud.</p>
     </div>
@@ -513,7 +588,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
 <section class="page" id="page-about">
   <div class="inner">
     <div class="page-head">
-      <span class="badge">Mission</span>
+      <div class="eyebrow">Mission</div>
       <h1>What is BarnOS?</h1>
       <p class="lead">BarnOS is an open-source ecosystem of modular tools built around one idea: you should own your digital life the same way you own your land.</p>
     </div>
@@ -582,7 +657,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
 <section class="page" id="page-roadmap">
   <div class="inner">
     <div class="page-head">
-      <span class="badge">Roadmap</span>
+      <div class="eyebrow">Roadmap</div>
       <h1>What's being built</h1>
       <p class="lead">BarnOS is actively in development. Here's the current state of each project and what's coming next.</p>
     </div>
@@ -653,7 +728,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
 <section class="page" id="page-docs">
   <div class="inner">
     <div class="page-head">
-      <span class="badge">Documentation</span>
+      <div class="eyebrow">Documentation</div>
       <h1>Getting Started</h1>
       <p class="lead" style="margin-bottom:16px">Everything you need to build, deploy, and run your own digital homestead.</p>
       <div class="notice"><svg class="ic" width="15" height="15"><use href="#i-alert"/></svg>Docs are a work in progress — more detail coming as each module matures.</div>
@@ -743,7 +818,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
 <section class="page" id="page-faq">
   <div class="inner narrow">
     <div class="page-head">
-      <span class="badge">FAQ</span>
+      <div class="eyebrow">FAQ</div>
       <h1>Frequently Asked Questions</h1>
       <p class="lead">Everything you need to know about BarnOS and its projects.</p>
     </div>
