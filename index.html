@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#991b1b">
 <title>BarnOS — Your Digital Homestead</title>
 <link rel="icon" type="image/png" href="favicon.png">
+<script>document.documentElement.className+=' js'</script>
 <style>
 :root{
   --red:#991b1b;--red-dark:#7f1d1d;--red-50:#fef2f2;--red-100:#fee2e2;--red-200:#fecaca;--red-300:#fca5a5;
@@ -82,8 +83,8 @@ ul{list-style:none}
 
 /* ---------- pages / sections ---------- */
 .page{display:none}
-.page.active{display:block;animation:pageIn .3s ease both}
-@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.page.active{display:block;animation:pageIn .3s ease}
+@keyframes pageIn{from{transform:translateY(8px)}to{transform:none}}
 .inner{max-width:var(--wrap);margin:0 auto;padding:112px 16px 96px}
 .inner.narrow{max-width:768px}
 .page-head .badge{margin-bottom:16px}
@@ -92,9 +93,9 @@ h1{font-size:clamp(34px,5vw,48px);font-weight:900;letter-spacing:-.025em;line-he
 h2{font-size:clamp(24px,3.5vw,32px);font-weight:700;letter-spacing:-.015em}
 .section-title{margin-bottom:24px;font-size:24px}
 
-/* ---------- reveal animation ---------- */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
-.reveal.in{opacity:1;transform:none}
+/* ---------- reveal animation (only hides content when JS is running) ---------- */
+.js .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.js .reveal.in{opacity:1;transform:none}
 
 /* ---------- home: hero ---------- */
 #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -301,7 +302,7 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
 <main>
 
 <!-- ═════════ HOME ═════════ -->
-<section class="page" id="page-home">
+<section class="page active" id="page-home">
   <div id="hero">
     <div class="hero-in">
       <img src="barnos-logo.png" alt="BarnOS logo">
@@ -768,12 +769,16 @@ footer{border-top:1px solid var(--stone-200);background:#fff;margin-top:0}
   var pages={};
   routes.forEach(function(r){pages[r]=document.getElementById('page-'+r);});
 
-  /* reveal-on-scroll */
-  var io=new IntersectionObserver(function(entries){
+  /* reveal-on-scroll: anything already in the viewport shows instantly;
+     below-the-fold items animate in as they scroll into view */
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(entries){
     entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-  },{threshold:0.15});
+  },{threshold:0.15}):null;
   function observeReveals(root){
-    root.querySelectorAll('.reveal:not(.in)').forEach(function(el){io.observe(el);});
+    root.querySelectorAll('.reveal:not(.in)').forEach(function(el){
+      if(!io||el.getBoundingClientRect().top<window.innerHeight){el.classList.add('in');}
+      else{io.observe(el);}
+    });
   }
 
   /* router */
