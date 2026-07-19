@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#991b1b">
 <title>BarnOS — Your Digital Homestead</title>
 <link rel="icon" type="image/png" href="favicon.png">
-<script>document.documentElement.className+=' js'</script>
+<script>document.documentElement.className+=' js';if(/[?&]fast/.test(location.search))document.documentElement.className+=' fast'</script>
 <style>
 :root{
   --red:#991b1b;--red-dark:#7f1d1d;--red-50:#fef2f2;--red-100:#fee2e2;--red-200:#fecaca;--red-300:#fca5a5;
@@ -96,6 +96,9 @@ h2{font-size:clamp(24px,3.5vw,32px);font-weight:700;letter-spacing:-.015em}
 /* ---------- reveal animation (only hides content when JS is running) ---------- */
 .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
 .js .reveal.in{opacity:1;transform:none}
+/* ?fast — skip all animation, for screenshot tests */
+.js.fast .reveal{opacity:1;transform:none;transition:none}
+.js.fast .page.active{animation:none}
 
 /* ---------- home: hero ---------- */
 #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
